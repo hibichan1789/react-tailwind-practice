@@ -147,8 +147,58 @@ function OnlineStatus(){
     </div>
   );
 }
+function ImageCardBase(){
+  return(
+    <div className="w-48 bg-white rounded-2xl overflow-hidden shadow-md border">
+      <div className="h-32 bg-blue-400"></div>
+      <div className="p-4">
+        <p className="font-bold text-sm">カードタイトル</p>
+      </div>
+    </div>
+  );
+}
+function ProgressBar(){
+  return(
+    <div className="flex items-center gap-2 p-2">
+      <div className="bg-gray-200 w-64 h-4 rounded-full overflow-hidden group">
+        <div className="h-full bg-indigo-600 w-0 group-hover:w-[70%] transition-all duration-1000"></div>
+      </div>
+      <p className="text-xs">70%</p>
+    </div>
+  );
+}
+function CardGrid(){
+  return(
+    <div className="grid grid-cols-3 gap-4 p-4">
+      <div className="bg-blue-100 p-4 rounded">Card 1</div>
+      <div className="bg-blue-200 p-4 rounded">Card 2</div>
+      <div className="bg-blue-300 p-4 rounded">Card 3</div>
+      <div className="bg-blue-400 p-4 rounded">Card 4</div>
+    </div>
+  );
+}
+const colors = [
+    { name: "red", class: "bg-red-600" },
+    { name: "green", class: "bg-green-600" },
+    { name: "blue", class: "bg-blue-600" },
+    { name: "indigo", class: "bg-indigo-600" },
+  ];
+//tailwindでは完全なクラス名がないといけない（動的にクラスを作成してはいけない）
+function ColorGallery(){
+  return(
+    <div className="grid grid-cols-4 gap-2">
+      {colors.map(color => {
+        return(
+          <div className={`${color.class} rounded-md hover:scale-110 cursor-pointer aspect-square p-2`} key={color.class}>
+            Color: {color.class}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 export default function TailWindApp(){
   return(
-    <OnlineStatus/>
+    <ColorGallery/>
   );
 }
