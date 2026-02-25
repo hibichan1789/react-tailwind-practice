@@ -69,8 +69,86 @@ function Text(){
     </div>
   );
 }
+
+function SimpleRow(){
+  return(
+    <div className="flex items-center gap-2 p-4 bg-gray-100 w-fit">
+      <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
+      <span className="text-gray-700 font-medium">設定</span>
+    </div>
+  );
+}
+function SimpleMenu(){
+  return(
+    <div className="flex items-center gap-3 p-3 bg-white w-fit hover:bg-gray-200 rounded-lg cursor-pointer transition-colors duration-200 group">
+      <div className="w-8 h-8 rounded-md bg-gray-200 group-hover:bg-blue-100 transition-colors"></div>
+      <span className="text-sm">プロフィール</span>
+    </div>
+  );
+}
+//group を親要素に書くと子要素のgroup-*:が親要素に乗った時にも反応するようになる
+
+function NotificationItem(){
+  return(
+    <div className="flex gap-4 rounded-lg w-full max-w-lg border border-gray-100">
+      <div className="shrink-0 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+        !
+      </div>
+      <div className="flex  flex-col items-center">
+        <h3 className="font-bold text-gray-900">アップデート完了</h3>
+        <p className="text-xs text-gray-500">システムは最新です</p>
+      </div>
+    </div>
+  );
+}
+
+function HeaderRow(){
+  return(
+    <div className="flex items-center justify-between p-4 bg-white w-full">
+      <div className="flex items-center gap-2">
+        <div className="w-6 h-6 bg-indigo-600 rounded"></div>
+        <span className="font-bold">Project A</span>
+      </div>
+      <span className="text-xs text-gray-400">2026/02/25</span>
+    </div>
+  );
+}
+function TaskCard(){
+  return(
+    <div className="flex items-center justify-between p-4 rounded-md bg-gray-50">
+      <div className="flex items-center gap-3">
+        <div className="w-5 h-5 bg-blue-500 rounded-sm flex items-center justify-center text-white">✓</div>
+        <div className="flex flex-col">
+          <p className="shrink-0 text-sm text-gray-900 font-semibold">sample task</p>
+          <p className="text-sm text-gray-700">2026/3/2</p>
+        </div>
+      </div>
+      <div className="shrink-0 w-fit px-2 py-1 rounded-sm border border-red-400 text-red-600 bg-red-100 text-[10px] font-mono flex items-center justify-center">
+        重要
+      </div>
+    </div>
+  );
+}
+function NotificationIcon(){
+  return(
+    <div className="relative w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
+      <span className="text-xl">🔶</span>
+      <div className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white"></div>
+    </div>
+  );
+}
+function OnlineStatus(){
+  return(
+    <div className="w-16 h-16 relative">
+      <div className="w-full  h-full bg-gray-300 rounded-full flex justify-center items-center border-2 border-gray-100">
+        User
+      </div>
+      <div className="absolute top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+    </div>
+  );
+}
 export default function TailWindApp(){
   return(
-    <Text/>
+    <OnlineStatus/>
   );
 }
