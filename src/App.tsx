@@ -197,8 +197,65 @@ function ColorGallery(){
     </div>
   );
 }
+function UserRow(){
+  return(
+    <div className="flex justify-start items-center gap-3 p-4 bg-gray-500 border rounded-lg shadow-sm">
+      <div className="w-10 h-10 rounded-full bg-indigo-100 text-indigo-500 flex items-center justify-center font-bold">
+        Y
+      </div>
+      <span className="font-medium text-gray-800">Yamada Taro</span>
+      <button className="ml-auto px-3 py-1 bg-gray-100 rounded hover:bg-gray-200 border border-gray-300 text-gray-600 transition-all shadow-md active:shadow-none active:translate-y-0.5">
+        編集
+      </button>
+    </div>
+  );
+}
+function MessageItem(){
+  const date = new Date();
+  const dateMessage = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`
+  return(
+    <div className="flex items-center  p-4 bg-white border-b border-gray-300 gap-4">
+      <div className="w-12 h-12 rounded-full bg-indigo-500 shrink-0"></div>
+      <div className="flex flex-col gap-1">
+        <p className="font-bold">エンジニア太郎</p>
+        <p className="text-sm text-gray-500">了解しました!</p>
+      </div>
+      <div className="ml-auto text-xs text-gray-400">
+        {dateMessage}
+      </div>
+    </div>
+  );
+}
+function SimpleInput(){
+  return(
+    <div className="flex flex-col p-6 bg-gray-50 gap-1">
+      <label
+        htmlFor="email-input"
+        className="text-sm font-medium text-gray-700"
+      >
+        メールアドレス
+      </label>
+      <input
+        type="email" placeholder="example@gmail.com"
+        className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:border-transparent focus:ring-blue-500 transition-all"
+      />
+    </div>
+  );
+}
+function SearchBar(){
+  return(
+    <div className="max-w-md relative">
+      <input 
+        type="text"
+        className="border-none shadow-md w-full rounded-full py-3 pl-14 pr-4 focus:ring-2 focus:ring-indigo-400 transition-all focus:outline-none"
+      />
+      <div className="absolute top-1/2 left-4 -translate-y-1/2 text-gray">検索:</div>
+    </div>
+  );
+}
+//absolute top-1/2 -translate-y-1/2　これでアイコンとかを検索窓にかぶせることができる
 export default function TailWindApp(){
   return(
-    <ColorGallery/>
+    <SearchBar/>
   );
 }
