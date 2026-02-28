@@ -393,8 +393,164 @@ function ResponsivePhoto(){
   );
 }
 
+function PlanCard(){
+  return(
+    <div className="relative group w-64 border-2 p-6 border-transparent bg-gray-100 hover:border-indigo-600 rounded-2xl shadow-md cursor-pointer transition-all active:scale-95">
+      <div className="w-12 h-12 rounded-full bg-gray-300 group-hover:bg-indigo-100 transition-colors flex items-center justify-center">
+        <span className="text-xl group-hover:scale-110 transition-transform">🚀</span>
+      </div>
+      <h3 className="font-bold text-lg">Pro Plan</h3>
+      <p>月額 2,980円</p>
+
+      <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity text-indigo-600">
+        ✓
+      </div>
+    </div>
+  );
+}
+//active:scale-  これでへこみとかの再現ができる
+
+function FAQ(){
+  return(
+    <div className="group max-w-md mx-auto p-3 flex flex-col gap-3 border rounded-xl  cursor-pointer hover:shadow-lg active:border-indigo-600 active:ring active:ring-offset-2 active:ring-indigo-300 transition-all">
+      <div className="flex items-center gap-3 w-full">
+        <h3 className="font-medium text-lg">Tailwindは難しいですか</h3>
+        <p className="text-xl group-hover:translate-x-1 transition-all group-active:text-indigo-600 group-active:rotate-90 group-active:duration-300">&gt;</p>
+      </div>
+      <h4 className="max-h-0 text-sm overflow-hidden group-active:max-h-20 transition-all duration-500">
+        1、2ヶ月練習すれば呼吸するように書けます!
+      </h4>
+    </div>
+  );
+}//拡張性がない駄作
+
+function SkeletonProfiles(){
+  return(
+    <div className="bg-slate-100 p-4 w-80 flex flex-col gap-4 rounded-2xl animate-pulse">
+      <div className="flex gap-4 items-center px-3 py-2 border-2 border-transparent hover:border-gray-600 transition-all rounded-lg cursor-pointer">
+        <div className="w-12 h-12 bg-slate-200 rounded-full"></div>
+        <div className="flex flex-col gap-2 items-start">
+          <h4 className="max-w-30 whitespace-nowrap truncate font-bold">Hibichan1</h4>
+          <p className="max-w-45 whitespace-nowrap truncate text-sm text-gray-600">sample description aaaaaaaaaaaaaaa</p>
+        </div>
+      </div>
+      <div className="flex gap-4 items-center px-3 py-2 border-2 border-transparent hover:border-gray-600 transition-all rounded-lg cursor-pointer">
+        <div className="w-12 h-12 bg-slate-200 rounded-full"></div>
+        <div className="flex flex-col gap-2 items-start">
+          <h4 className="max-w-30 whitespace-nowrap truncate font-bold">Hibichan2</h4>
+          <p className="max-w-45 whitespace-nowrap truncate text-sm text-gray-600">sample description aaaaaaaaaaaaaaa</p>
+        </div>
+      </div>
+            <div className="flex gap-4 items-center px-3 py-2 border-2 border-transparent hover:border-gray-600 transition-all rounded-lg cursor-pointer">
+        <div className="w-12 h-12 bg-slate-200 rounded-full"></div>
+        <div className="flex flex-col gap-2 items-start">
+          <h4 className="max-w-30 whitespace-nowrap truncate font-bold">Hibichan3</h4>
+          <p className="max-w-45 whitespace-nowrap truncate text-sm text-gray-600">sample description aaaaaaaaaaaaaaa</p>
+        </div>
+      </div>
+            <div className="flex gap-4 items-center px-3 py-2 border-2 border-transparent hover:border-gray-600 transition-all rounded-lg cursor-pointer">
+        <div className="w-12 h-12 bg-slate-200 rounded-full"></div>
+        <div className="flex flex-col gap-2 items-start">
+          <h4 className="max-w-30 whitespace-nowrap truncate font-bold">Hibichan4</h4>
+          <p className="max-w-45 whitespace-nowrap truncate text-sm text-gray-600">sample description aaaaaaaaaaaaaaa</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SettingsList(){
+  return(
+    <div className="w-80 bg-white rounded-2xl shadow-lg border overflow-hidden divide-y">
+      <div className="p-4 hover:bg-gray-100 cursor-pointer flex justify-between items-center">
+        <span>通知設定</span>
+        <span className="text-gray-400 text-xs">ON</span>
+      </div>
+      <div className="p-4 hover:bg-gray-50 cursor-pointer flex justify-between items-center">
+        <span>プライバシー</span>
+        <span className="text-gray-400 text-xs">設定済み</span>
+      </div>
+      <div className="p-4 hover:bg-gray-50 cursor-pointer flex justify-between items-center text-red-600">
+        <span>ログアウト</span>
+      </div>
+    </div>
+  );
+}
+
+type UserScore = {
+  username:string;
+  score:number;
+}
+type UserRanking = UserScore & {rank:number}
+const userScores:UserScore[] = [
+  {username:"sample user1", score:3000},
+  {username:"sample user2", score:1500},
+  {username:"sample user3", score:8000},
+  {username:"sample user4", score:6000},
+  {username:"sample user5", score:1200},
+  {username:"sample user6", score:12090}
+]
+function getUserRank(userScores:UserScore[]):UserRanking[]{
+  const clonedUserScore = structuredClone(userScores);
+  const rankedUser:UserRanking[] = clonedUserScore
+  .sort((user1, user2)=> -(user1.score - user2.score))
+  .map((user, index)=>{
+    return {...user, rank:index + 1};
+  });
+  return rankedUser;
+}
+type RankingListProps = {
+  rankedUser:UserRanking[]
+}
+function RankingList({rankedUser}:RankingListProps){
+  return(
+    <div className="flex flex-col divide-y-2 divide-gray-600/50 w-80 shadow-2xl rounded-3xl overflow-hidden mx-auto">
+      {rankedUser.map(user => {
+        let rankColor = "text-gray-700";
+        if(user.rank === 1){
+          rankColor = "text-yellow-600";
+        }
+        else if(user.rank === 2){
+          rankColor = "text-slate-600";
+        }
+        else if(user.rank === 3){
+          rankColor = "text-amber-600";
+        }
+        return(
+          <div
+            key={user.rank}
+            className="group flex gap-4 items-center px-3 py-5 cursor-pointer hover:bg-gray-200 transition-all"
+          >
+            <div className="shrink-0 w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center group-hover:scale-150 group-hover:bg-gray-100 transition-all">
+              <span className={`text-xl font-bold ${rankColor}`}>{user.rank}</span>
+            </div>
+            <h3 className="font-bold flex-1">{user.username}</h3>
+            <h3 className="font-mono text-gray-600 group-hover:text-indigo-500 transition-colors">{user.score.toLocaleString()}pt</h3>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function TabController(){
+  return(
+    <div className="flex px-4 py-3 bg-gray-100 rounded-2xl w-fit items-center gap-3">
+      <div className="relative px-6 py-6 text-sm font-bold shadow-sm rounded-lg bg-white">
+        <span className="text-indigo-600">週間</span>
+        <div className="absolute w-5 h-5 rounded-full bg-red-500 border border-gray-200 -top-1 -right-1 flex items-center justify-center">
+          <span className="text-gray-100 text-xs truncate">20</span>
+        </div>
+      </div>
+      <div className="px-6 py-6 text-sm font-bold shadow-sm rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-200/50 active:scale-90 transition-all cursor-pointer">
+        <span>月間</span>
+      </div>
+    </div>
+  );
+}
+
 export default function TailWindApp(){
   return(
-    <ResponsivePhoto/>
+    <TabController/>
   );
 }
